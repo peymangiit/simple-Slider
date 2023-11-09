@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seasons Slider</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            width: 100dvw;
+            height: 100dvh;
+            display: grid;
+            place-items: center;
+            transition: background-image .3s ease-in;
+
+            background-image: url("images/winter.jpg");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            backdrop-filter: blur(3px)  brightness(40%);
+        }
+       main{
+            /* position: relative; */
+            display: grid;
+            place-items: center;
+            padding: 0 25px;
+            width: 100%;
+            height: 65%;
+
+        }
+        /* ................Slider........................ */
+        .slider{
+            position: relative;
+            width: 90%;
+            height: 100%;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgb(233, 230, 230);
+
+        }
+        .slider > img{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        .prev , .next{
+            position: absolute;
+            display: grid;
+            place-items: center;
+            z-index: 10;
+            width: 1em;
+            height: 100%;
+            font-size: 3em;
+            font-weight: bold;
+            text-align: center;
+            text-shadow: 0 5px 5px rgba(0, 0, 0, 0.11);
+            color: rgba(250, 235, 215, 0.521);
+            cursor: pointer;
+            border: none;
+            background-color: transparent;
+        }
+        .next{
+            right: 0;
+        }
+        .prev:hover , .next:hover{
+            background-color: rgba(0, 0, 0, 0.137);
+            color: rgb(250, 235, 215);
+        }
+        .markers{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            position: absolute;
+            z-index: 10;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-start-end-radius: 2em 2em;
+            border-start-start-radius: 2em 2em;
+            width: 50%;
+            height: 7%;
+            background-color: rgba(0, 0, 0, 0.089);
+        }
+        .markers > .marker{
+            border-radius: 25px;
+            width: .5em;
+            height: .5em;
+            background-color: rgb(76, 76, 95);
+            transition: all .3s ease-in;
+            cursor: pointer;
+        }
+        .marker.active{
+            width: 1.5em;
+            background-color: rgb(58, 61, 240);
+        }
+    </style>
+</head>
+<body>
+    
+    <main>
+        <div class="slider">
+            <button class="prev">⫷</button>
+            <button class="next">⫸</button>
+            <img src="./images/spring.jpg" alt="">
+            <img src="./images/summer.jpg" alt="">
+            <img src="./images/Autumn.jpg" alt="">
+            <img src="./images/winter.jpg" alt="">
+
+            <div class="markers">
+                <div class="marker" id="marker1"></div>
+                <div class="marker" id="marker2"></div>
+                <div class="marker" id="marker3"></div>
+                <div class="marker" id="marker4"></div>
+            </div>
+        </div>
+    </main>
+   
+    <script>
+        const body = document.querySelector("body");
+        const images = document.querySelectorAll("img")
+        
+        const dots = document.querySelectorAll(".marker");
+        dots[3].classList.add("active");
+
+        dots.forEach(dot =>{
+            dot.addEventListener("click", (e)=>{
+                
+                e.target.classList.toggle("active");
+                // if (e.target.id.slice(-1) == 1){
+                //     body.style.backgroundImage = 'url("images/spring.jpg")';
+                // }
+                switch (e.target.id.slice(-1)){
+                    case "1" : 
+                        body.style.backgroundImage = 'url("images/spring.jpg")';
+                        break;
+                    case "2":
+                        body.style.backgroundImage = 'url("images/summer.jpg")';
+                        break;
+                    case "3":
+                        body.style.backgroundImage = 'url("images/Autumn.jpg")';
+                        break;
+                    case "4":
+                        body.style.backgroundImage = 'url("images/winter.jpg")';
+                        break;
+                }
+                console.log(e.target.id.slice(-1));
+            })
+        })
+    </script>
+</body>
+</html>
